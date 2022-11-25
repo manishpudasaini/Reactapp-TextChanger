@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Alert from "./Component/Alert";
+// import Feature from "./Component/Feature";
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./Component/Navbar";
+import TextForm from "./Component/TextForm";
 
 function App() {
+  const [alert, setAlert] = useState(null);
+
+  //function for alert
+  const handelAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+
+    //function used to clear the alert after 3second
+    setTimeout(() => {
+      setAlert(null);
+    }, 3000);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <Router> */}
+      <Navbar title="Ezio" />
+      <Alert alert={alert} />
+
+      <div className="body" style={{ backgroundColor: "#CECECE" }}>
+        <div className="container ">
+          {/* <Routes>
+              <Route exact path="/feature" element={<Feature />}></Route>
+            </Routes> */}
+          <TextForm heading="Enter the " handelAlert={handelAlert} />
+        </div>
+      </div>
+      {/* </Router> */}
+    </>
   );
 }
 
